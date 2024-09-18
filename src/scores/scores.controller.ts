@@ -18,9 +18,18 @@ export class ScoresController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Post()
   @Throttle({ default: { limit: 3, ttl: 60000 } })
-  async submitScore(@Body() body: { score: number }, @Request() req) {
-    const { score } = body;
+  async submitScore(
+    @Body() body: { score: number; userID: number | undefined },
+    @Request() req,
+  ) {
+    const { score, userID } = body;
     const userId = req.user.userId;
+    if (req.user.role === 'admin') {
+      if (!userID) return this.scoresService.submitScore(userId, score);
+
+      return this.scoresService.submitScore(userID, score);
+    }
+
     return this.scoresService.submitScore(userId, score);
   }
 

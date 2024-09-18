@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Score } from './score.entity';
-import { User } from '../users/user.entity';
+import { Scores } from './score.entity';
+import { Users } from '../users/user.entity';
 
 @Injectable()
 export class ScoresService {
   constructor(
-    @InjectRepository(Score)
-    private scoresRepository: Repository<Score>,
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectRepository(Scores)
+    private scoresRepository: Repository<Scores>,
+    @InjectRepository(Users)
+    private usersRepository: Repository<Users>,
   ) {}
 
   async submitScore(userId: number, scoreValue: number) {

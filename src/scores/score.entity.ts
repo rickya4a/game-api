@@ -1,14 +1,14 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { User } from '../users/user.entity';
+import { Users } from '../users/user.entity';
 
 @Entity()
-export class Score {
+export class Scores {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   score: number;
 
-  @ManyToOne(() => User, (user) => user.id)
-  user: User;
+  @ManyToOne(() => Users, (user) => user.id)
+  user: Users;
 }
